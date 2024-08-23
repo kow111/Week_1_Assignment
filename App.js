@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import SplashScreen from "./src/SplashScreen";
+import { useEffect, useState } from "react";
+import HomeScreen from "./src/HomeScreen";
 
 export default function App() {
+  const [isShowSplashScreen, setIsShowSplashScreen] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsShowSplashScreen(false);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
+      {isShowSplashScreen ? <SplashScreen /> : <HomeScreen />}
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
